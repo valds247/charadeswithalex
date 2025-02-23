@@ -91,7 +91,7 @@
             checkGuess(guess) {
                 const warmer = guess === this.correctOptions[this.cycle];
                 const feedback = warmer ? "You’re getting warmer!" : "You’re getting colder!";
-                document.getElementById("feedback").innerText = `Alex says: ${feedback}`;
+                document.getElementById("feedback").innerText = `Tricky Alex says: ${feedback}`;
                 document.getElementById("feedback").style.color = warmer ? "green" : "red";
                 const container = document.getElementById("game-container");
                 container.innerHTML = "";
