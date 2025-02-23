@@ -48,16 +48,16 @@
             cycle: 0,
             answer: "cherry",
             options: [
-                ["Is it candy?", "Is it a bug?", "Is it a rock?"],
-                ["Is it chocolate?", "Is it a berry?", "Is it a gum?"],
-                ["Is it a strawberry?", "Is it a peach?", "Is it a cherry?"],
-                ["Is it a grape?", "Is it a lemon?", "Is it an apple?"]
+                ["Is it a fruit?", "Is it a bug?", "Is it a vegetable?"],
+                ["Is it long and thin?", "Is it round?", "Is it square?"],
+                ["Is it blue?", "Is it green?", "Is it red?"],
+                ["Size of a marble?", "Size of a tennis ball?", "Size of a soccer ball?"]
             ],
             correctOptions: [
-                "Is it candy?",      // Round 0: Starting broad, arbitrary choice
-                "Is it a berry?",    // Round 1: Narrows to berry category
-                "Is it a cherry?",   // Round 2: Exact answer
-                "Is it a grape?"     // Round 3: Another fruit, refining the path
+                "Is it a fruit?",      // Round 0: Starting broad, arbitrary choice
+                "Is it round?",    // Round 1: Narrows to berry category
+                "Is it red?",   // Round 2: Exact answer
+                "Size of a marble?"     // Round 3: Another fruit, refining the path
             ],
             finalOptions: ["Apple", "Banana", "Cherry", "Orange", "Mango"],
 
