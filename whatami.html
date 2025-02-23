@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charades with Alex</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #feedback {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #next-btn {
+            background-color: #008CBA;
+        }
+        #next-btn:hover {
+            background-color: #007BB5;
+        }
+    </style>
+</head>
+<body>
+    <div id="feedback"></div>
+    <div id="game-container" class="button-container"></div>
+
+    <script>
+        const game = {
+            cycle: 0,
+            answer: "cherry",
+            options: [
+                ["Is it candy?", "Is it a bug?", "Is it a rock?"],
+                ["Is it chocolate?", "Is it a berry?", "Is it a gum?"],
+                ["Is it a strawberry?", "Is it a peach?", "Is it a cherry?"],
+                ["Is it a grape?", "Is it a lemon?", "Is it an apple?"]
+            ],
+            finalOptions: ["Apple", "Banana", "Cherry", "Orange", "Mango"],
+
+            startGame() {
+                this.cycle = 0;
+                document.getElementById("feedback").innerText = "Alex says: Guess!";
+                this.showStartButton();
+            },
+
+            showStartButton() {
+                const container = document.getElementById("game-container");
+                container.innerHTML = "";
+                const startBtn = document.createElement("button");
+                startBtn.innerText = "What am I?";
+                startBtn.onclick = () => this.showOptions();
+                container.appendChild(startBtn);
+            },
+
+            showOptions() {
+                const container = document.getElementById("game-container");
+                container.innerHTML = "";
+                document.getElementById("feedback").innerText = ""; // Clear feedback initially
+                this.options[this.cycle].forEach(option => {
+                    const btn = document.createElement("button");
+                    btn.innerText = option;
+                    btn.onclick = () => this.checkGuess(option);
+                    container.appendChild(btn);
+                });
+            },
+
+            checkGuess(guess) {
+                const warmer = guess.toLowerCase().includes(this.answer) || guess.toLowerCase().includes("berry");
+                const feedback = warmer ? "You’re getting warmer!" : "You’re getting colder!";
+                document.getElementById("feedback").innerText = `Alex says: ${feedback}`;
+                document.getElementById("feedback").style.color = warmer ? "green" : "red";
+                const container = document.getElementById("game-container");
+                container.innerHTML = "";
+                const nextBtn = document.createElement("button");
+                nextBtn.id = "next-btn";
+                nextBtn.innerText = "Next";
+                nextBtn.onclick = () => this.nextStep();
+                container.appendChild(nextBtn);
+                this.cycle++;
+            },
+
+            nextStep() {
+                if (this.cycle < 4) {
+                    this.showOptions();
+                } else {
+                    this.showFinalGuess();
+                }
+            },
+
+            showFinalGuess() {
+                document.getElementById("feedback").innerText = "Alex says: Guess me!";
+                document.getElementById("feedback").style.color = "black";
+                const container = document.getElementById("game-container");
+                container.innerHTML = "";
+                this.finalOptions.forEach(option => {
+                    const btn = document.createElement("button");
+                    btn.innerText = option;
+                    btn.onclick = () => this.checkFinal(option);
+                    container.appendChild(btn);
+                });
+            },
+
+            checkFinal(guess) {
+                const container = document.getElementById("game-container");
+                container.innerHTML = "";
+                const isCorrect = guess.toLowerCase() === this.answer;
+                document.getElementById("feedback").innerText = `Alex says: ${isCorrect ? "Correct!" : "Sorry, that was not it!"}`;
+                document.getElementById("feedback").style.color = isCorrect ? "green" : "red";
+                const playAgainBtn = document.createElement("button");
+                playAgainBtn.innerText = "Play Again";
+                playAgainBtn.onclick = () => this.startGame();
+                container.appendChild(playAgainBtn);
+            }
+        };
+
+        // Start the game when the page loads
+        game.startGame();
+    </script>
+</body>
+</html>
