@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charades with Tricky Alex</title>
+    <title>Charades with Alex</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,6 +53,12 @@
                 ["Is it a strawberry?", "Is it a peach?", "Is it a cherry?"],
                 ["Is it a grape?", "Is it a lemon?", "Is it an apple?"]
             ],
+            correctOptions: [
+                "Is it candy?",      // Round 0: Starting broad, arbitrary choice
+                "Is it a berry?",    // Round 1: Narrows to berry category
+                "Is it a cherry?",   // Round 2: Exact answer
+                "Is it a grape?"     // Round 3: Another fruit, refining the path
+            ],
             finalOptions: ["Apple", "Banana", "Cherry", "Orange", "Mango"],
 
             startGame() {
@@ -83,7 +89,7 @@
             },
 
             checkGuess(guess) {
-                const warmer = guess.toLowerCase().includes(this.answer) || guess.toLowerCase().includes("berry");
+                const warmer = guess === this.correctOptions[this.cycle];
                 const feedback = warmer ? "You’re getting warmer!" : "You’re getting colder!";
                 document.getElementById("feedback").innerText = `Alex says: ${feedback}`;
                 document.getElementById("feedback").style.color = warmer ? "green" : "red";
@@ -131,7 +137,6 @@
             }
         };
 
-        // Start the game when the page loads
         game.startGame();
     </script>
 </body>
