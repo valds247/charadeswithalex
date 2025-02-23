@@ -63,7 +63,7 @@
 
             startGame() {
                 this.cycle = 0;
-                document.getElementById("feedback").innerText = "Alex says: Guess!";
+                document.getElementById("feedback").innerText = "Tricky Alex says: Guess!";
                 this.showStartButton();
             },
 
@@ -112,7 +112,7 @@
             },
 
             showFinalGuess() {
-                document.getElementById("feedback").innerText = "Alex says: Guess me!";
+                document.getElementById("feedback").innerText = "Tricky Alex says: Guess me!";
                 document.getElementById("feedback").style.color = "black";
                 const container = document.getElementById("game-container");
                 container.innerHTML = "";
@@ -128,7 +128,7 @@
                 const container = document.getElementById("game-container");
                 container.innerHTML = "";
                 const isCorrect = guess.toLowerCase() === this.answer;
-                document.getElementById("feedback").innerText = `Alex says: ${isCorrect ? "Correct!" : "Sorry, that was not it!"}`;
+                document.getElementById("feedback").innerText = `Tricky Alex says: ${isCorrect ? "Correct!" : "Sorry, that was not it!"}`;
                 document.getElementById("feedback").style.color = isCorrect ? "green" : "red";
                 const playAgainBtn = document.createElement("button");
                 playAgainBtn.innerText = "Play Again";
